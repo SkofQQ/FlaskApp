@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2 style="margin-bottom: 25px;">{{ title }}</h2>
+
+<form method="post" action="/insert_to_db" enctype="multipart/form-data" style="width: 45%;">
+    <div class="form-group">
+        <label for="title">Исполнитель</label>
+        <input type="text" name="artist"
+               placeholder="Введите исполнителя" class="form-control"
+               value="{{ request.form['artist'] }}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="content">Название композиции</label>
+        <input type="text" placeholder="Введите название композиции" name="song"
+                  class="form-control">{{ request.form['content'] }}</input>
+    </div>
+
+    <div class="form-group">
+        <label for="content">Продолжительность</label>
+        <input type="text" name="duration" placeholder="Введите продолжительность в формате hh:mm:ss"
+                  class="form-control">{{ request.form['duration'] }}</input>
+    </div>
+    
+    <div class="form-group">
+        <label for="content">Название альбома</label>
+        <input type="text" name="album" placeholder="Введите название альбома"
+                  class="form-control">{{ request.form['album'] }}</input>
+    </div>
+
+    <!-- <div class="form-group">
+        <label for="content">Год выпуска</label>
+        <input type="text" name="year" placeholder="Введите год выпуска"
+                  class="form-control">{{ request.form['year'] }}</input>
+    </div> -->
+
+    <div class="form-group">
+        <label for="content">Год выпуска</label>
+        <select class="custom-select" id="inlineFormCustomSelect" name="year">
+            <option selected>Выберите год выпуска</option>
+            {% for i in range(1990,2022) %}
+            <option value="{{i}}">{{i}}</option>
+            {% endfor %}
+          </select>
+
+
+
+        <!-- <label for="content">Год выпуска</label>
+        <input type="text" name="year" placeholder="Введите год выпуска"
+                  class="form-control">{{ request.form['year'] }}</input> -->
+    </div>
+
+    <div class="form-group">
+        <label for="content">Лейбл</label>
+        <input type="text" name="label" placeholder="Введите название лейбла"
+                  class="form-control">{{ request.form['label'] }}</input>
+    </div>
+
+    <div class="form-group">
+        <label for="content">Название жанра/жанров</label>
+        <input type="text" name="genre" placeholder="Введите название жанра/жанров"
+                  class="form-control">{{ request.form['genre'] }}</input>
+    </div>
+
+    <div class="form-group">
+        <label for="content">Описание</label>
+        <textarea  name="about" placeholder="Введите описание"
+                  class="form-control">{{ request.form['about'] }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Выберите файл обложки альбома</label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file" >
+      </div>
+
+      <br>
+
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Поместить в БД</button>
+    </div>
+</form>
+
+
+{% endblock %}

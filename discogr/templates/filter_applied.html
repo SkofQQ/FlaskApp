@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+
+
+<p>Сортировка</p>
+
+
+<form method="POST" action="/show_records">
+<div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" value="1" name="mycheckbox">
+    <label class="form-check-label" for="exampleCheck1">Сначала новые</label>
+ </div>
+
+<div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" value="2" name="mycheckbox">
+    <label class="form-check-label" for="exampleCheck1">Сначала старые</label>
+ </div>
+
+  <button type="submit" class="btn btn-primary">Применить</button>
+</form>
+
+
+
+<p> Количество записей: <strong> {{num_of_records}} </strong></p>
+
+{% for post in posts %}
+        <a href="{{ url_for('post', post_id=post['id']) }}">
+            <h2>{{ post['artist'] }}</h2>
+        </a>
+        <span class="badge badge-primary">{{ post['created'] }}</span>
+
+        <a href="{{ url_for('edit', id=post['id']) }}">
+            <span class="badge badge-warning">Edit</span>
+        </a>
+        <!-- <hr> -->
+
+
+
+
+{% endfor %}
+
+
+<p></p>
+<p></p>
+
+<!-- <h3>{{ message }}</h3> 
+<p>Use this area to provide additional information.</p>  -->
+
+{% endblock %}

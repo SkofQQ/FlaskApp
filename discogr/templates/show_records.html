@@ -1,0 +1,89 @@
+{% extends "layout.html" %} {% block content %}
+
+
+<h2 style="margin-bottom: 25px;">{{ title }}</h2>
+
+<form method="POST" action="/show_records">
+    <div class="form-group">
+                   
+       <div class="show_records_search_block">
+           <div class="show_records_search_input_block">
+                    <!-- <label for="title">Поиск</label>  -->
+                    {% if search_applied %}
+                    <input type="text" name="search_string" class="form-control show_records_search_input" value="{{ search_string[0] }}" aria-describedby="emailHelp"></input>
+                   
+                    {% else %}
+                    <input type="text" name="search_string" placeholder="Введите уже что-нибудь" class="form-control show_records_search_input" value="{{ request.form['artist'] }}" aria-describedby="emailHelp"></input>
+                    {% endif %}    
+                                
+            </div>
+            
+                    <button type="submit" class="btn btn-primary show_records_search_button">Найти</button>
+           
+        </div>
+
+    </div>
+
+<br>
+    <div class="form-group">
+        <p><strong>Сортировка по году выпуска</strong></p>
+        {% if sort_dec %}
+        <button type="submit" class="btn btn-warning btn-sm" value="1" name="sort_by_date">Сначала новые</button> 
+        {% else %}
+        <button type="submit" class="btn btn-outline-dark btn-sm" value="1" name="sort_by_date">Сначала новые</button> 
+        {% endif %} 
+        
+        {% if sort_asc %}
+        <button type="submit" class="btn btn-warning btn-sm" value="2" name="sort_by_date">Сначала старые</button> 
+        {% else %}
+        <button type="submit" class="btn btn-outline-dark btn-sm" value="2" name="sort_by_date">Сначала старые</button> 
+        {% endif %}
+
+    </div>
+
+</form>
+
+
+<br>
+
+<p style="margin-bottom: 35px;"> Количество найденных записей: <strong> {{num_of_records}} </strong></p>
+
+{% for post in posts %}
+<div class="container">
+    <div class="row" style="padding-top: 0px; padding-bottom: 0px;">
+        <div class="col-sm-1" style="padding-left: 0px; margin-right: 35px;">
+            <!--<img src="https://i.pinimg.com/originals/5e/84/f0/5e84f0578f552d99bdea6bf75e89cc88.jpg" width="130" height="130">-->
+	    <img src="{{post['cover']}}" width="130" height="130">
+        </div>  
+        <div class="col-md-auto align-baseline">
+      
+            <p style="font-size: 18px; margin-bottom: 5px;">  <a href="{{ url_for('post', post_id=post['id']) }}"> <strong> {{ post['song'] }} </strong> </a> (Альбом: {{post['album']}})  </p>        
+           
+            <p style="font-size: 16px; color:grey">Исполнитель: {{ post['artist'] }}</p>
+           
+           <br>
+           
+            <span class="badge badge-light" style="font-size: 14px;"> Год выпуска: {{ post['year'] }}</span>
+
+            <a href="{{ url_for('edit', id=post['id']) }}">
+                <span class="badge badge-warning" style="font-size: 14px;"> Редактировать запись</span>
+            </a>
+           
+           
+        </div>
+    </div>   
+</div>
+<br>
+<hr>
+<br>
+
+{% endfor %}
+
+
+<p></p>
+<p></p>
+
+<!-- <h3>{{ message }}</h3> 
+<p>Use this area to provide additional information.</p>  -->
+
+{% endblock %}
