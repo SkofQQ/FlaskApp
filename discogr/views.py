@@ -21,7 +21,7 @@ def get_db_connection():
          host='127.0.0.1',
          port= 3306,
          user='root',
-         passwd='1222245w',
+         passwd='passwd',
          database='discogr')
     cur = cnx.cursor()
     return cur
