@@ -8,7 +8,7 @@ from discogr import app
 import mysql.connector as mariadb
 import os
 
-UPLOAD_FOLDER = '/Users/kirillskorobogatov/Desktop/FlaskGromov/FlaskGromov/covers'
+UPLOAD_FOLDER = '/Users/skofqq/Desktop/discogr/discogr/covers'
 ALLOWED_EXTENSIONS = set(['png','jpg','jpeg'])
 
 #def get_db_connection():
